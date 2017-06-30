@@ -1,0 +1,72 @@
+import math
+
+
+def quicksort(list,s,e):
+  i=s
+  j=e
+  if i>j:
+    return
+  temp=list[i]
+  while i!=j:
+    while list[j]>=temp and i<j:
+       j=j-1
+    while list[i]<=temp and i<j:
+       i=i+1
+    if i<j:
+      t=list[i]
+      list[i]=list[j]
+      list[j]=t
+  list[s]=list[i]
+  list[i]=temp
+  quicksort(list,s,i-1)
+  quicksort(list,i+1,e)
+
+def fc(list,m):
+  i=0
+  a=0
+  l=len(list)
+  while i<l:
+   t=list[i]-m
+   a=a+t*t
+   i=i+1 
+  return float(a)/l
+def zws(tlist):
+  list=tlist[:]
+  l=len(list)
+  quicksort(list,0,l-1)
+  if l%2==0:
+    return (list[l/2-1]+list[(l/2)])/2.0
+  return list[l/2]
+
+
+t=raw_input()
+n=int(t.split()[0])
+k=int(t.split()[1])
+all=0
+list=[]
+s=0
+l=0
+res=[]
+for n in range(n):
+   t=raw_input()
+   v=t.split()[0]
+   if v=='1':
+      num=int(t.split()[1])
+      if s<k:
+       list.append(num)
+       l=l+1
+      else:
+       all=all-list[s%k]
+       list[s%k]=num
+      all=all+num
+      s=s+1
+   elif v=='2':
+      res.append(all/l)
+   elif v=='3':
+      res.append(fc(list,all/l))
+   else:
+      res.append(zws(list))
+i=0
+while i<len(res):
+   print '%.2f' %res[i]
+   i=i+1
