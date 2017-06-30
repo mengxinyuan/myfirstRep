@@ -1,6 +1,4 @@
 import math
-
-
 def quicksort(list,s,e):
   i=s
   j=e
